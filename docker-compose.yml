@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  master:
+    build:
+      context: ./server
+      dockerfile: Dockerfile.master
+    container_name: master
+    ports:
+      - "5000:5000"
+    networks:
+      - fl_network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  client1:
+    build:
+      context: ./client1
+      dockerfile: Dockerfile.client1
+    container_name: client1
+    networks:
+      - fl_network
+    depends_on:
+      master:
+        condition: service_healthy
+
+networks:
+  fl_network:
+    driver: bridge
+
