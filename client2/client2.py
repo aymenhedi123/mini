@@ -9,7 +9,7 @@ from time import sleep
 
 # Define the client model
 model = Sequential([
-    Dense(64, activation='relu', input_shape=(27,)),  # Adjust input_shape as per your features
+    Dense(64, activation='relu', input_shape=(24,)),  
     Dense(32, activation='relu'),
     Dense(32, activation='relu'),
     Dense(32, activation='relu'),
@@ -41,7 +41,7 @@ def send_updated_model(url, updated_weights):
 # Fetch model weights from master
 if __name__ == "__main__":
     print("Reading data")
-    df = pd.read_csv('smoking_subset_2.csv')  # Use 'smoking_subset_1.csv' for client1
+    df = pd.read_csv('smoking_subset_2.csv')
     print(df.head())
 
     url = 'http://master:5000/get_model'
@@ -52,8 +52,21 @@ if __name__ == "__main__":
     print("Model weights set from the master server")
 
     # Prepare the data
-    X = df.drop('target', axis=1).values  # Assuming 'target' is the label column
-    y = df['target'].values  # Adjust to match your data structure
+    from sklearn.preprocessing import LabelEncoder
+    #Deleting uselless  features
+    df.drop(columns=['ID'], inplace=True)
+    df.drop(columns=['oral'], inplace=True)
+    # Initialize LabelEncoder
+    label_encoder = LabelEncoder()
+
+    # Encode the 'Gender' column
+    df['gender'] = label_encoder.fit_transform(df['gender'])
+
+    # Encode the 'Tartar' column
+    df['tartar'] = label_encoder.fit_transform(df['tartar'])
+
+    X = df.drop('y', axis=1).values
+    y = df['y'].values  
 
     # Split the data into training and testing sets
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
@@ -64,10 +77,9 @@ if __name__ == "__main__":
     X_test = scaler.transform(X_test)
 
     # Train the model locally
-    model.fit(X_train, y_train, epochs=1)  # Adjust epochs and batch size as needed
+    model.fit(X_train, y_train, epochs=4)  
     print("Local training completed")
-
-    # Evaluate the model on the test set
+    #Model evaluation
     loss, accuracy = model.evaluate(X_test, y_test)
     print(f'Test Loss: {loss}, Test Accuracy: {accuracy}')
 
