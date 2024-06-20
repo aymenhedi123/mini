@@ -13,7 +13,7 @@ clients_losses = []
 
 # Define and compile the model
 model = Sequential([
-    Dense(64, activation='relu', input_shape=(24,)),  # Adjust input_shape as per your features
+    Dense(64, activation='relu', input_shape=(24,)), # Adjust input_shape as per your features
     Dense(32, activation='relu'),
     Dense(32, activation='relu'),
     Dense(32, activation='relu'),
@@ -28,7 +28,7 @@ print("Loaded initial model weights from global_weights.h5")
 @app.route('/get_model', methods=['GET'])
 def get_model():
     weights = model.get_weights()
-    weights_serializable = [w.tolist() for w in weights]  # Convert weights to list for serialization
+    weights_serializable = [w.tolist() for w in weights] # Convert weights to list for serialization
     return jsonify({'weights': weights_serializable})
 
 @app.route('/update_model', methods=['POST'])
@@ -58,12 +58,12 @@ def health_check():
 
 def federated_averaging():
     global clients_weights, clients_losses
-
     iteration = 0
     max_iterations = 20
 
     while iteration < max_iterations:
         time.sleep(10)  # Adjust sleep time based on your needs
+        print("Iteration:", iteration + 1)  # Debug print
 
         with lock:
             if clients_weights:
@@ -82,6 +82,5 @@ def federated_averaging():
 
 if __name__ == "__main__":
     import threading
-    threading.Thread(target=federated_averaging, daemon=True).start()  # Start federated averaging thread
-
+    threading.Thread(target=federated_averaging, daemon=True).start()
     app.run(host="0.0.0.0", port=5000)

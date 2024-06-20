@@ -26,11 +26,12 @@ services:
     depends_on:
       master:
         condition: service_healthy
-   client2:
+
+  client2:
     build:
       context: ./client2
       dockerfile: Dockerfile.client2
-    container_name: client1
+    container_name: client2
     networks:
       - fl_network
     depends_on:
@@ -40,4 +41,3 @@ services:
 networks:
   fl_network:
     driver: bridge
-
