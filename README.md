@@ -1,7 +1,7 @@
 # Federated Learning Architecture with Docker
-## I. Overview:
+## I. Overview
 This project builds an efficient federated learning architecture using Docker containers. Federated learning allows multiple clients to collaboratively train a machine learning model while keeping their data decentralized. The objective is to classify whether a user is a smoker or non-smoker based on 27 features, including sex and health state. The dataset format and information are illustrated in the provided figure.
-## II. Architecture:
+## II. Architecture
 Horizontal Federated Learning: Since we have similar subsets of data, we are utilizing a horizontal federated learning approach.
 FedAvg Method: For updating the global weights, we use the Federated Averaging (FedAvg) method, which calculates the new global model weights.
 
