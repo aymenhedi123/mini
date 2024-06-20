@@ -38,8 +38,6 @@ We use the following libraries:
 - It trains the model locally with its subset of data ; in our case it works with "smoking_subset_1.csv"
 - It sends the updated weights and evaluation metrics back to the server
 
-# client.py code
-img
 #### client2.py
 - The client2 receives the global weights
 - It trains the model locally with its subset of data ; in our case it works with "smoking_subset_2.csv"
@@ -50,7 +48,7 @@ The Docker Compose file defines and activates the three containers together, cre
 
 #### docker-compose.yml content
 
-# VI. Processing
+## VI. Processing
 1.Clone the Repository:
 
 git clone https://github.com/aymenhedi123/mini.git
