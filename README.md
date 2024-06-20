@@ -5,13 +5,14 @@ This project builds an efficient federated learning architecture using Docker co
 Horizontal Federated Learning: Since we have similar subsets of data, we are utilizing a horizontal federated learning approach.
 FedAvg Method: For updating the global weights, we use the Federated Averaging (FedAvg) method, which calculates the new global model weights.
 
-![fl](https://github.com/aymenhedi123/mini/assets/103534291/3f1cc670-ea06-4021-bafc-cd107b6a4b26)
+![Nouveau projet](https://github.com/aymenhedi123/mini/assets/173182629/fe268b8d-d93e-492b-a651-9f4b2c08c4f6)
 ---
 ## III. Docker Containers
 We use three Docker containers:
 Server Container: Manages the federated learning process and aggregates the model weights.
 Client Containers (2): Each client trains the model locally with their respective subset of data and communicates with the server.
-![Nouveau projet](https://github.com/aymenhedi123/mini/assets/173182629/fe268b8d-d93e-492b-a651-9f4b2c08c4f6)
+![image](https://github.com/aymenhedi123/mini/assets/173182629/5f096fa6-e4f4-4acc-bafa-e5b6fb9857f0)
+
 
 ## VI. Requirements
 We use the following libraries:
