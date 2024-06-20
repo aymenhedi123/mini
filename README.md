@@ -23,11 +23,11 @@ dockerfile
 # Dockerfile content for the clients
 img
 # Requirements
-We use the following libraries:
-TensorFlow: An open-source machine learning framework used for training and evaluating the models.
-Pandas: A data manipulation and analysis library.
-NumPy: A library for numerical computations.
-Flask: A micro web framework for Python used to ensure communication via API for sending weights, etc.
+We use the following libraries:\\
+TensorFlow: An open-source machine learning framework used for training and evaluating the models.\\
+Pandas: A data manipulation and analysis library.\\
+NumPy: A library for numerical computations.\\
+Flask: A micro web framework for Python used to ensure communication via API for sending weights, etc.\\
 How It Works
 # master.py:
  The master.py script initializes the global training model weights (global_weight.h5), sends them to the clients, and waits for the clients to respond with updated weights. The server then applies the FedAvg method to update the global model weights and repeats the process until a stopping condition is met (maximum 20 iterations or loss < 0.2).
