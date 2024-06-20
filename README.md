@@ -11,7 +11,8 @@ FedAvg Method: For updating the global weights, we use the Federated Averaging (
 We use three Docker containers:
 Server Container: Manages the federated learning process and aggregates the model weights.
 Client Containers (2): Each client trains the model locally with their respective subset of data and communicates with the server.
-![a](https://github.com/aymenhedi123/mini/assets/103534291/9957db15-5858-4da2-9813-6b1714f3c423)
+![Nouveau projet](https://github.com/aymenhedi123/mini/assets/173182629/fe268b8d-d93e-492b-a651-9f4b2c08c4f6)
+
 ## VI. Requirements
 We use the following libraries:
 
