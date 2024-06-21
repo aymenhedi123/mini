@@ -62,8 +62,6 @@ Finally, the container is configured to execute client2.py upon startup using Py
 ### Docker Compose script:
 The Docker Compose file defines and activates the three containers together, creating a network with a bridge driver and setting up the necessary volumes.
 
-#### docker-compose.yml content
-
 ## VI. Processing
 1.Clone the Repository:
 
