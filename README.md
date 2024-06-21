@@ -25,16 +25,19 @@ We use the following libraries:
 
 ## V. Script
 ### Docker Files
-- Dockerfile.master:
+- **Dockerfile.master:**
+
 Setting up an environment based on Ubuntu 22.04, installing necessary packages like wget, bzip2, curl, git, and Anaconda3.
 It then downloads and installs Anaconda3, setting the appropriate path. After that, it installs TensorFlow and other Python dependencies using Conda and pip.
 The working directory is set to /app, and files global_weights.h5, master.py, and smoking.csv are copied into it.
 Port 5000 is exposed, and the container is configured to run master.py upon startup.
-- Dockerfile.client1:
+- **Dockerfile.client1:**
+  
 Initializing an environment based on Ubuntu 22.04, updating and installing essential packages like wget, bzip2, curl, and git.
 Anaconda3 is fetched from its repository, installed, and the PATH variable is adjusted accordingly.
 TensorFlow and additional Python libraries such as TensorFlow Federated, Flask, NumPy, and Pandas are installed via Conda and pip. The working directory is set to /app, and files client1.py and smoking_subset_1.csv are copied into it. Finally, the container is configured to run client1.py upon startup using Python.
-- Dockerfile.client2:
+- **Dockerfile.client2:**
+  
 Starting from a base image of Ubuntu 22.04, updating and installing necessary packages like wget, bzip2, curl, and git.
 Anaconda3 is downloaded and installed from its repository, and the environment variable PATH is set accordingly.
 TensorFlow and additional Python libraries like TensorFlow Federated, Flask, NumPy, and Pandas are installed using Conda and pip.
