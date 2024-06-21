@@ -32,11 +32,11 @@ def get_model_with_retries(url, max_retries=5, backoff=5):
                 raise
 
 # Function to send updated model weights to the master
-def send_updated_model(url, updated_weights, loss, accuracy):
+def send_updated_model(update_url_weights, updated_weights, loss, accuracy):
     weights_serializable = [w.tolist() for w in updated_weights]
-    response = requests.post(url, json={'weights': weights_serializable, 'loss': loss, 'accuracy': accuracy})
+    response = requests.post(update_url_weights, json={'weights': weights_serializable, 'loss': loss, 'accuracy': accuracy})
     response.raise_for_status()
-    print(f"Updated model sent to {url}, response: {response.json()}")
+    print(f"Updated model sent to {update_url_weights}, response: {response.json()}")
 
 # Fetch model weights from master
 def main():
@@ -61,15 +61,14 @@ def main():
     X_test = scaler.transform(X_test)
 
     url = 'http://master:5000/get_model'
-    update_url = 'http://master:5000/update_model'
-
+    update_url_weights = 'http://master:5000/update_weights'
     max_iterations = 20
     for iteration in range(max_iterations):
         response = get_model_with_retries(url)
         weights = response.json()['weights']
         weights = [tf.convert_to_tensor(w) for w in weights]
         model.set_weights(weights)
-        print(f"Model weights set from the master server, iteration {iteration + 1}")
+        print(f"Model weights set in client from the master server, iteration {iteration + 1}")
 
         best_accuracy = 0.0
         best_weights = None
@@ -96,7 +95,7 @@ def main():
         # Print the updated weights for debugging
         print(f"Client {iteration + 1} updated weights (first layer first neuron): {updated_weights[0][0]}")
 
-        send_updated_model(update_url, updated_weights, loss, accuracy)
+        send_updated_model(update_url_weights, updated_weights, loss, accuracy)
 
         if loss < 0.2:
             print("Early stopping criteria met. Stopping local training.")
