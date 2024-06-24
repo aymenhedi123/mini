@@ -29,13 +29,14 @@ print("Loaded initial model weights from global_weights.h5")
 @app.route('/get_model', methods=['GET'])
 def get_model():
     weights = model.get_weights()
+    print("Global model First weight matrix:\n", weights[0])
     weights_serializable = [w.tolist() for w in weights]  # Convert weights to list for serialization
     return jsonify({'weights': weights_serializable})
 
 @app.route('/update_weights', methods=['POST'])
 def update_weights():
     global clients_updates
-    print("Updated model weights received from clients")
+    print("updated model weights received from clients")
     data = request.get_json()
     local_weights = [np.array(w) for w in data['weights']]
     local_loss = data['loss']
@@ -67,15 +68,13 @@ def federated_averaging():
             # Average each layer's weights across all clients
             new_weights = [np.mean([client_weights[layer] for client_weights in clients_weights], axis=0) for layer in range(len(clients_weights[0]))]
             model.set_weights(new_weights)
-            print("Global model weights:\n", new_weights[0])
             clients_weights = []  # Clear the weights for next iteration
             clients_losses = []   # Clear the losses for next iteration
             print("Global model updated with federated averaging")
 
         # Early stopping check
-        if all(loss < 0.1 for loss in clients_losses):
+        if all(loss < 0.35 for loss in clients_losses):
             print("Early stopping criteria met. Stopping federated learning.")
-            model.save("final_model.h5")
 
 if __name__ == "__main__":
     import threading
