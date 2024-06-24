@@ -75,8 +75,8 @@ cd last/fl_two_client/mini
 
 docker-compose up --build
 
-** This README provides a clear and structured guide to your federated learning project, complete with explanations of the architecture, requirements, and step-by-step instructions for getting started. **
-** Made with :heart: by Mohamed Aymen Alimi and Hedi Aloulou **
+**This README provides a clear and structured guide to your federated learning project, complete with explanations of the architecture, requirements, and step-by-step instructions for getting started.**
+**Made with :heart: by Mohamed Aymen Alimi and Hedi Aloulou**
 
 
 
